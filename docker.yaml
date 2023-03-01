@@ -20,18 +20,20 @@ plugins: /verdaccio/plugins
 
 # https://verdaccio.org/docs/webui
 web:
-  title: Verdaccio Publish Config Test
-  # comment out to disable gravatar support
-  # gravatar: false
+  title: Verdaccio alxgb server
+  gravatar: true
   # by default packages are ordercer ascendant (asc|desc)
   # sort_packages: asc
   # convert your UI to the dark side
-  # darkMode: true
+  darkMode: true
   # html_cache: true
   # by default all features are displayed
   # login: true
   # showInfo: true
-  # showSettings: true
+  showSettings: false
+  primary_color: '#3f1696'
+  login: true
+
   # In combination with darkMode you can force specific theme
   # showThemeSwitch: true
   # showFooter: true
@@ -42,10 +44,10 @@ web:
   # scriptsBodyAfter:
   #    - '<script type="text/javascript" src="https://my.company.com/customJS.min.js"></script>'
   #  HTML tags injected before ends </head>
-  #  metaScripts:
-  #    - '<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>'
-  #    - '<script type="text/javascript" src="https://browser.sentry-cdn.com/5.15.5/bundle.min.js"></script>'
-  #    - '<meta name="robots" content="noindex" />'
+  metaScripts:
+    - '<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>'
+    - '<script type="text/javascript" src="https://browser.sentry-cdn.com/5.15.5/bundle.min.js"></script>'
+    - '<meta name="robots" content="noindex" />'
   #  HTML tags injected first child at <body/>
   #  bodyBefore:
   #    - '<div id="myId">html before webpack scripts</div>'
@@ -73,6 +75,11 @@ uplinks:
 # https://verdaccio.org/docs/protect-your-dependencies/
 # https://verdaccio.org/docs/configuration#packages
 packages:
+  '@my-company/*':
+    access: $authenticated
+    publish: $authenticated
+    unpublish: $authenticated
+
   '@*/*':
     # scoped packages
     access: $all
@@ -124,24 +131,24 @@ server:
 # // url -> https://somedomain.org/second_prefix/'
 
 # https://verdaccio.org/docs/configuration#security
-# security:
-#   api:
-#     legacy: true
-#     jwt:
-#       sign:
-#         expiresIn: 29d
-#       verify:
-#         someProp: [value]
-#    web:
-#      sign:
-#        expiresIn: 1h # 1 hour by default
-#      verify:
-#         someProp: [value]
+security:
+  api:
+    legacy: true
+    jwt:
+      sign:
+        expiresIn: 29d
+      # verify:
+      #   someProp: [value]
+  web:
+    sign:
+      expiresIn: 1h # 1 hour by default
+    #  verify:
+    #     someProp: [value]
 
 # https://verdaccio.org/docs/configuration#user-rate-limit
-# userRateLimit:
-#   windowMs: 50000
-#   max: 1000
+userRateLimit:
+  windowMs: 50000
+  max: 1000
 
 # https://verdaccio.org/docs/configuration#max-body-size
 # max_body_size: 10mb
