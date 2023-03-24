@@ -76,7 +76,7 @@ uplinks:
 # https://verdaccio.org/docs/configuration#packages
 packages:
   '@alxgb/*':
-    access: $all
+    access: $authenticated
     publish: $authenticated
     unpublish: $authenticated
     proxy: npmjs
