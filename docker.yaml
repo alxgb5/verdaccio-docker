@@ -76,10 +76,11 @@ uplinks:
 # https://verdaccio.org/docs/configuration#packages
 packages:
   '@alxgb/*':
-    access: $authenticated
+    access: $all
     publish: $authenticated
     unpublish: $authenticated
-
+    proxy: npmjs
+    
   '@*/*':
     # scoped packages
     access: $all
